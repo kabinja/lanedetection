@@ -22,15 +22,15 @@ mask = np.zeros_like(edges)
 ignore_mask_color = 255
 
 imshape = image.shape
-vertices = np.array([[(0, imshape[0]), (0, 0), (imshape[1], 0), (imshape[1],imshape[0])]], dtype= np.int32)
+vertices = np.array([[(0.05*imshape[1], imshape[0]), (0.45*imshape[1], 0.55*imshape[0]), (0.55*imshape[1], 0.55*imshape[0]), (0.95*imshape[1],imshape[0])]], dtype= np.int32)
 cv2.fillPoly(mask, vertices, ignore_mask_color)
 masked_edges = cv2.bitwise_and(edges, mask)
 
-rho = 1
+rho = 2
 theta = np.pi/180
-threshold = 1
-min_line_length = 10
-max_line_gap = 1
+threshold = 15
+min_line_length = 40
+max_line_gap = 20
 line_image = np.copy(image) * 0
 
 lines = cv2.HoughLinesP(masked_edges, rho, theta, threshold, np.array([]), min_line_length, max_line_gap)
